@@ -19,13 +19,13 @@ while window:
             window = False
         if event.type == pygame.MOUSEBUTTONDOWN:
 
-            if pygame.mouse.get_pos()[0] in range(0, 900) and pygame.mouse.get_pos()[1] in range(300, 1080):
+            if pygame.mouse.get_pos()[0] in range(600, 1440) and pygame.mouse.get_pos()[1] in range(520, 675):
                 window = False
                 from level1 import *
-            elif pygame.mouse.get_pos()[0] in range(900, 1920) and pygame.mouse.get_pos()[1] in range(300, 1080):
+            elif pygame.mouse.get_pos()[0] in range(600, 1440) and pygame.mouse.get_pos()[1] in range(520, 860):
                 window = False
                 from level2 import *
-            elif pygame.mouse.get_pos()[0] in range(900, 1920) and pygame.mouse.get_pos()[1] in range(300, 1080):
+            elif pygame.mouse.get_pos()[0] in range(600, 1440) and pygame.mouse.get_pos()[1] in range(860, 1040):
                 window = False
                 from level3 import *
     screen.blit(start_main, (0, 0))
