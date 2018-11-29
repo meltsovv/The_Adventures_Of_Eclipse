@@ -41,11 +41,13 @@ def main():
     gems_sun = pygame.sprite.Group()
     drab=[]
     doors=[]
+    doors1=[]
     heroes1 = pygame.sprite.Group()
     heroes = pygame.sprite.Group()
     heroes.add(hero)
     heroes1.add(hero1)
     entities.add(hero)
+    entities.add(hero1)
 
 
     level = [
@@ -59,8 +61,8 @@ def main():
         "/##  /          ##/       ##/  /            /            ##/",
         "/##  /   *   *  ##/  *   *##/  /  +   +   + /  +   +   + ##/",
         "/-----##----------$---------!  /##-----------##------------!",
-        "/     ##                    /  /##/         0##       /    /",
-        "/   * ##  *    *  *  *  *   /  /##/  +   +  0##+     +/+   /",
+        "/     ##                    /  /##/          ##       /    /",
+        "/   * ##  *    *  *  *  *   /  /##/  +   +   ##+     +/+   /",
         "/##-----------------------##/  /##--------##------##--$--##/",
         "/##/                     /##/  /##   /    ##     /##     ##/",
         "/##/   *   *   *   *     /##/  /##   /+   ##    +/##    +##/",
@@ -125,6 +127,7 @@ def main():
                 door = Door(x, y)
                 entities.add(door)
                 doors.append(door)
+
 
 
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
@@ -193,9 +196,14 @@ def main():
             pygame.mixer.init()
             pygame.mixer.music.load('music/gems.mp3')
             pygame.mixer.music.play(1)
-
-        if gems_count==2:
+        if gems_count == 2 :
             entities.remove(doors)
+            doors=[]
+        # if gems_count1 == 2:
+        #     entities.remove(doors1)
+        #     doors=[]
+        if pygame.sprite.groupcollide(heroes ,heroes1 ,False,False):
+            print("the end")
         entities.draw(screen)  # отображение
         heroes.draw(screen)
         heroes1.draw(screen)
