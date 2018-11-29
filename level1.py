@@ -4,6 +4,7 @@ from pygame import *
 from player import Player
 from blocks import *
 from player1 import Player1
+
 # from start_main import *
 # Объявляем переменные
 WIN_WIDTH = 1920  # Ширина создаваемого окна
@@ -14,12 +15,14 @@ st_x=1830
 st_y=995
 st_x1=64
 st_y1=40
+start=1
 
 
-def main():
+# def main():
+if start==1:
     pygame.init()  # Инициация PyGame, обязательная строчка
     screen = pygame.display.set_mode(DISPLAY,FULLSCREEN)  # Создаем окошко
-    pygame.display.set_caption("The Adventures Of Eclips")  # Пишем в шапку
+    pygame.display.set_caption("The Adventures Of Eclipse")  # Пишем в шапку
 
     pygame.mixer.pre_init(44100, -16, 1, 512)
     pygame.mixer.init()
@@ -135,7 +138,7 @@ def main():
         x = 0  # на каждой новой строчке начинаем с нуля
     gems_count = 0
     gems_count1 = 0
-    while 1:  # Основной цикл программы
+    while start==1:  # Основной цикл программы
         timer.tick(60)
         for e in pygame.event.get():  # Обрабатываем события
             if e.type == pygame.KEYDOWN:
@@ -196,14 +199,24 @@ def main():
             pygame.mixer.init()
             pygame.mixer.music.load('music/gems.mp3')
             pygame.mixer.music.play(1)
-        if gems_count == 2 :
+        if gems_count == 2 and gems_count1 == 2:
+            pygame.mixer.pre_init(44100, -16, 1, 512)
+            pygame.mixer.init()
+            pygame.mixer.music.load('music/door.mp3')
+            pygame.mixer.music.play(1)
+
             entities.remove(doors)
             doors=[]
+
+
         # if gems_count1 == 2:
         #     entities.remove(doors1)
         #     doors=[]
-        if pygame.sprite.groupcollide(heroes ,heroes1 ,False,False):
+        if pygame.sprite.groupcollide(heroes ,heroes1 ,True,True):
             print("the end")
+            start=2
+
+            from next_level2 import*
         entities.draw(screen)  # отображение
         heroes.draw(screen)
         heroes1.draw(screen)
@@ -216,4 +229,4 @@ def main():
         # print(gems_count)
 
 
-main()
+# main()

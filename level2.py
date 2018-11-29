@@ -1,8 +1,8 @@
 import pygame
 from pygame import *
-from player import Player
-from blocks import *
-from player1 import Player1
+from player_level2 import Player
+from blocks_level2 import *
+from player1_level2 import Player1
 
 # from start_main import *
 # Объявляем переменные
@@ -14,8 +14,6 @@ st_x=1830
 st_y=995
 st_x1=64
 st_y1=40
-x_m=50
-y_m=50
 
 
 
@@ -28,11 +26,9 @@ def main():
     # pygame.mixer.init()
     # pygame.mixer.music.load('music/fon.mp3')
     # pygame.mixer.music.play(-1)
-    bg_image=pygame.image.load("image/moon_day.png").convert()
-    bg_image1 = pygame.image.load("image/sun_day.png").convert()
+    bg_image=pygame.image.load("image/space.jpg").convert()
+
     # bg_image=pygame.transform.scale(bg_image,(1920,1080))
-
-
 
 
     hero = Player(st_x, st_y)  # соwздаем героя по (x,y) координатам
@@ -53,39 +49,38 @@ def main():
     heroes1.add(hero1)
     entities.add(hero)
 
-
     level = [
         "------------------------------------------------------------",
+        "/     /     /                                              /",
+        "/     /     /                                              /",
+        "/---  /  /      /                                          /",
+        "/  /  /  /      /                         _                /",
+        "/  /  /  /-------------------------------------------------/",
+        "/     /                                                    /",
+        "/     /                                                    /",
+        "/  /---------  /                                           /",
+        "/              /                                           /",
+        "/              /                                           /",
+        "/-----  -------/                                           /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/    /  /                                                  /",
+        "/                                    00                    /",
+        "/                                                          /",
+        "/                                  ##                      /",
         "/                                                          /",
         "/                                                          /",
         "/                                                          /",
         "/                                                          /",
         "/                                                          /",
         "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
+        "/----------------------------------------------------------/",
         "/                                                          /",
         "/                                                          /",
         "/----------------------------------------------------------/"]
@@ -95,23 +90,11 @@ def main():
     for row in level:  # вся строка
         for col in row:  # каждый символ
             if col == "-":
-                pf = Platform_gorizontal(x, y)
+                pf = Platform_gorizontal_level2(x, y)
                 entities.add(pf)
                 platforms.append(pf)
             if col == "/":
-                pf = Platform_vertical(x, y)
-                entities.add(pf)
-                platforms.append(pf)
-            if col == "^":
-                pf = Platform_up(x, y)
-                entities.add(pf)
-                platforms.append(pf)
-            if col == "$":
-                pf = Platform_down(x, y)
-                entities.add(pf)
-                platforms.append(pf)
-            if col == "!":
-                pf = Platform_right(x, y)
+                pf = Platform_vertical_level2(x, y)
                 entities.add(pf)
                 platforms.append(pf)
             if col == "+":
@@ -128,6 +111,10 @@ def main():
                 drab.append(dr)
             if col == "0":
                 door = Door(x, y)
+                entities.add(door)
+                doors.append(door)
+            if col == "_":
+                door = Button_sun(x, y)
                 entities.add(door)
                 doors.append(door)
 
@@ -180,32 +167,28 @@ def main():
             if e.type == KEYUP and e.key == K_s:
                 down1 = False
 
-        screen.blit(bg_image1, (-300, 0))  # Каждую итерацию необходимо всё перерисовывать
-        screen.blit(bg_image, (960, 0))
+         # Каждую итерацию необходимо всё перерисовывать
+        screen.blit(bg_image, (0, 0))
         entities.draw(screen)  # отображение
         heroes.draw(screen)
 
         heroes1.draw(screen)
-        if pygame.sprite.groupcollide(heroes,gems_moon,False,True):
-            gems_count+=1
-            pygame.mixer.pre_init(44100, -16, 1, 512)
-            pygame.mixer.init()
-            pygame.mixer.music.load('music/gems.mp3')
-            pygame.mixer.music.play(1)
-        if pygame.sprite.groupcollide(heroes1,gems_sun,False,True):
-            gems_count1+=1
-            pygame.mixer.pre_init(44100, -16, 1, 512)
-            pygame.mixer.init()
-            pygame.mixer.music.load('music/gems.mp3')
-            pygame.mixer.music.play(1)
-
-        if gems_count==2:
-            for row in level:  # вся строка
-                rowlist = list(row)
-                for i, c in enumerate(rowlist):
-                    if rowlist[i] == "0":
-                        rowlist[i] = " "
-                row = "".join(rowlist)
+        # if pygame.sprite.groupcollide(heroes,gems_moon,False,True):
+        #     gems_count+=1
+        #     pygame.mixer.pre_init(44100, -16, 1, 512)
+        #     pygame.mixer.init()
+        #     pygame.mixer.music.load('music/gems.mp3')
+        #     pygame.mixer.music.play(1)
+        # if pygame.sprite.groupcollide(heroes1,gems_sun,False,True):
+        #     gems_count1+=1
+        #     pygame.mixer.pre_init(44100, -16, 1, 512)
+        #     pygame.mixer.init()
+        #     pygame.mixer.music.load('music/gems.mp3')
+        #     pygame.mixer.music.play(1)
+#вставити кнопку
+        if pygame.sprite.groupcollide(heroes, gems_moon, False, False):
+            entities.remove(doors)
+            doors = []
         hero.update(left, right, up, down, platforms, doors)  # передвижение
         hero1.update(left1, right1, up1, down1, platforms, doors)
         # if gems_count==
@@ -213,6 +196,7 @@ def main():
         hero1.update(left1, right1, up1, down1, platforms,doors)
 
 
+        pygame.display.flip()
         pygame.display.update()  # обновление и вывод всех изменений на экран
 
         # print(gems_count)ad

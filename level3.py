@@ -193,13 +193,7 @@ def main():
             pygame.mixer.music.load('music/gems.mp3')
             pygame.mixer.music.play(1)
 
-        if gems_count==2:
-            for row in level:  # вся строка
-                rowlist = list(row)
-                for i, c in enumerate(rowlist):
-                    if rowlist[i] == "0":
-                        rowlist[i] = " "
-                row = "".join(rowlist)
+
         hero.update(left, right, up, down, platforms, doors)  # передвижение
         hero1.update(left1, right1, up1, down1, platforms, doors)
         # if gems_count==
