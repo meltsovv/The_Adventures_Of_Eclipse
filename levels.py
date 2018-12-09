@@ -1,14 +1,7 @@
 import pygame
-
-# from level2 import *
-
 pygame.init()
 screen = pygame.display.set_mode((1920, 1080), pygame.FULLSCREEN)
-
 pygame.display.set_caption("Our first game")
-
-
-
 window=True
 zmina = False
 start_main = pygame.image.load("image/1.jpg").convert()
@@ -18,7 +11,6 @@ while window:
         if event.type == pygame.QUIT:
             window = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-
             if pygame.mouse.get_pos()[0] in range(600, 1440) and pygame.mouse.get_pos()[1] in range(520, 675):
                 window = False
                 from level1 import *

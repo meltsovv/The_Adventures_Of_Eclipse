@@ -25,14 +25,14 @@ class Gems(sprite.Sprite):
         sprite.Sprite.__init__(self)
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
         self.image.fill(Color(PLATFORM_COLOR))
-        self.image = image.load("%s/blocks/gems_sun.png" % ICON_DIR).convert_alpha()
+        self.image = image.load("%s/blocks/gems_level2_sun.png" % ICON_DIR).convert_alpha()
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
 class Gems1(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
         self.image.fill(Color(PLATFORM_COLOR))
-        self.image = image.load("%s/blocks/gems_moon.png" % ICON_DIR).convert_alpha()
+        self.image = image.load("%s/blocks/gems_level2_moon.png" % ICON_DIR).convert_alpha()
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
 class Drab(sprite.Sprite):
     def __init__(self, x, y):
@@ -41,12 +41,19 @@ class Drab(sprite.Sprite):
         self.image.fill(Color(PLATFORM_COLOR))
         self.image = image.load("%s/blocks/drab1.png" % ICON_DIR).convert_alpha()
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
-class Door(sprite.Sprite):
+class Door_sun(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
         self.image.fill(Color(PLATFORM_COLOR))
         self.image = image.load("%s/blocks/door_down.png" % ICON_DIR).convert_alpha()
+        self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+class Door_moon(sprite.Sprite):
+    def __init__(self, x, y):
+        sprite.Sprite.__init__(self)
+        self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
+        self.image.fill(Color(PLATFORM_COLOR))
+        self.image = image.load("%s/blocks/door.png" % ICON_DIR).convert_alpha()
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
 class Button_sun(sprite.Sprite):
     def __init__(self, x, y):

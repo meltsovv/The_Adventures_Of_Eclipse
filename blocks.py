@@ -1,15 +1,9 @@
-# !/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from pygame import *
 import os
-
 PLATFORM_WIDTH = 32
 PLATFORM_HEIGHT = 32
 PLATFORM_COLOR = "#FF6262"
 ICON_DIR = os.path.dirname(__file__)  # Полный путь к каталогу с файлами
-
-
 class Platform_gorizontal(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)
@@ -71,8 +65,10 @@ class Door(sprite.Sprite):
         sprite.Sprite.__init__(self)
         self.image = Surface((PLATFORM_WIDTH, PLATFORM_HEIGHT))
         self.image.fill(Color(PLATFORM_COLOR))
-        self.image = image.load("%s/blocks/door_left.png" % ICON_DIR).convert_alpha()
+        self.image = image.load("%s/blocks/door.png" % ICON_DIR).convert_alpha()
         self.rect = Rect(x, y, PLATFORM_WIDTH, PLATFORM_HEIGHT)
+
+
 
 
 

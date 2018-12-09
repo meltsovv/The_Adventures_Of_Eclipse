@@ -10,8 +10,8 @@ COLOR = "#888888"
 animCount = 0
 walkDown =[pygame.image.load("image/run_up (1).png"),pygame.image.load("image/run_up (2).png"),pygame.image.load("image/run_up (3).png")]
 walkUp = [pygame.image.load("image/run_up (1).png"),pygame.image.load("image/run_up (2).png"),pygame.image.load("image/run_up (3).png")]
-walkLeft = [pygame.image.load("image/run_left11.png"),pygame.image.load("image/run_left12.png"),pygame.image.load("image/run_left13.png")]
-walkRight = [pygame.image.load("image/run_right11.png"),pygame.image.load("image/run_right12.png"),pygame.image.load("image/run_right13.png")]
+walkLeft = [pygame.image.load("image/run_left_scf (1).png"),pygame.image.load("image/run_left_scf (2).png"),pygame.image.load("image/run_left_scf (3).png")]
+walkRight = [pygame.image.load("image/run_right_scf (1).png"),pygame.image.load("image/run_right_scf (2).png"),pygame.image.load("image/run_right_scf (3).png")]
 
 
 
@@ -24,11 +24,11 @@ class Player(sprite.Sprite):
         self.startY = y
         self.yvel = 0  # скорость вертикального перемещения
         self.onGround = False  # На земле ли я?
-        self.image = pygame.image.load("image/run_left12.png")
+        self.image = pygame.image.load("image/run_left_scf (1).png")
         # self.image.fill(Color(COLOR))
         self.rect = Rect(x, y, WIDTH, HEIGHT)  # прямоугольный объект
 
-    def update(self, left, right, up, down, platforms,doors):
+    def update(self, left, right, up, down, platforms,doors_sun):
         global animCount
 
         if animCount + 1 >= 9:
@@ -62,12 +62,12 @@ class Player(sprite.Sprite):
             self.yvel = 0
 
         self.rect.y += self.yvel
-        self.collide(0, self.yvel, platforms,doors)
+        self.collide(0, self.yvel, platforms,doors_sun)
 
         self.rect.x += self.xvel  # переносим свои положение на xvel
-        self.collide(self.xvel, 0, platforms,doors)
+        self.collide(self.xvel, 0, platforms,doors_sun)
 
-    def collide(self, xvel, yvel, platforms,doors):
+    def collide(self, xvel, yvel, platforms,doors_sun):
         for p in platforms:
             if sprite.collide_rect(self, p):  # если есть пересечение платформы с игроком
 
@@ -84,7 +84,7 @@ class Player(sprite.Sprite):
                     self.rect.top = p.rect.bottom  # то не движется вверх
                     self.yvel = 0  # и энергия прыжка пропадает
 
-        for d in doors:
+        for d in doors_sun:
             if sprite.collide_rect(self, d):  # если есть пересечение платформы с игроком
 
                 if xvel > 0:  # если движется вправо

@@ -1,21 +1,15 @@
 import pygame
 from pygame import *
-
 MOVE_SPEED = 7
-
 WIDTH = 50
 HEIGHT = 50
 COLOR = "#888888"
-
 animCount = 0
 animCount1 = 0
-
-
 walkDown1 =[pygame.image.load("image/Solnce ruh verh.png"),pygame.image.load("image/Solnce ruh verh1.png"),pygame.image.load("image/Solnce ruh verh2.png")]
 walkUp1 = [pygame.image.load("image/Solnce ruh verh.png"),pygame.image.load("image/Solnce ruh verh1.png"),pygame.image.load("image/Solnce ruh verh2.png")]
 walkLeft1 = [pygame.image.load("image/run_left1.png"),pygame.image.load("image/run_left2.png"),pygame.image.load("image/run_left3.png")]
 walkRight1 = [pygame.image.load("image/run_right1.png"),pygame.image.load("image/run_right2.png"),pygame.image.load("image/run_right3.png")]
-
 class Player1(sprite.Sprite):
     def __init__(self, x, y):
         sprite.Sprite.__init__(self)

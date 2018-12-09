@@ -17,7 +17,8 @@ st_y1=40
 
 
 
-def main():
+start=1
+if start==1:
     pygame.init()  # Инициация PyGame, обязательная строчка
     screen = pygame.display.set_mode(DISPLAY,FULLSCREEN)  # Создаем окошко
     pygame.display.set_caption("The Adventures Of Eclips")  # Пишем в шапку
@@ -41,8 +42,11 @@ def main():
     platforms = []  # то, во что мы будем врезаться или опираться
     gems_moon = pygame.sprite.Group()
     gems_sun = pygame.sprite.Group()
+    button_sun= pygame.sprite.Group()
+    button_moon = pygame.sprite.Group()
     drab=[]
-    doors=[]
+    doors_sun=[]
+    doors_moon=[]
     heroes1 = pygame.sprite.Group()
     heroes = pygame.sprite.Group()
     heroes.add(hero)
@@ -51,38 +55,38 @@ def main():
 
     level = [
         "------------------------------------------------------------",
-        "/     /     /                                              /",
-        "/     /     /                                              /",
-        "/---  /  /      /                                          /",
-        "/  /  /  /      /                         _                /",
-        "/  /  /  /-------------------------------------------------/",
-        "/     /                                                    /",
-        "/     /                                                    /",
-        "/  /---------  /                                           /",
-        "/              /                                           /",
-        "/              /                                           /",
-        "/-----  -------/                                           /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/    /  /                                                  /",
-        "/                                    00                    /",
-        "/                                                          /",
-        "/                                  ##                      /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/                                                          /",
-        "/----------------------------------------------------------/",
-        "/                                                          /",
-        "/                                                          /",
+        "/                  /          /    /                       /",
+        "/          *       /* + * +   /  * /  + * +    * + * + *   /",
+        "/----##-##----##/##/--------##/##--/##-----/##/----------##/",
+        "/    ##/##   /##/##         ##/##  /##     /##/         /##/",
+        "/   *##/##*  /##/## *     + ##/##  /##* + */##/*  +  *  /##/",
+        "/##----/---##/##/-----/##--------##/##-----/##/-------##/##/",
+        "/##    /   ##/##/     /##        ##/##     /##/       ##/##/",
+        "/##*   / * ##/##/ *   /## +   *  ##/##+    /##/    * +##/##/",
+        "/------/-----/##/---##/-----##---##/----/##/##/##-------/##/",
+        "/            /##    ##/     ##  /##     /##/##/##////////##/",
+        "/            /##*  +##/* + *##  /##  *  /##/##/##        ##/",
+        "/##/##-/##/##/--------/-------##/##/--##/##/##/##+ * +   ##/",
+        "/##/##-/##/##/               /##/##/  ##/##/##/------------/",
+        "/##/##-/##/##/   * + * + *   /##/##/+*##/##/##             /",
+        "/##/##-/##/##/##/---------/##/##/##/----/##/## *    +      /",
+        "/##/##-/##/##/##/         /## ##/##     /##/-----/----##/##/",
+        "/##/##-/##/##/##/   +  =  /## ##/##* +  /##/     /    ##/##/",
+        "/##/##-/##/##/##/##-------/##------00-##/##/     /  + ##/##/",
+        "/##/##-/##/##/##/##       !##/       /##/##/##/##/##----/##/",
+        "/##/##-/##/##/##/## +     !##/ *     /##/##/##/##/##  ##/##/",
+        "/##/##-/##/##/##/---------/##/-----##/##/##/##/##/##* ##/##/",
+        "/##/##-/##/##/##          /##/     ##/##/##/##/##/----##/##/",
+        "/##/##-/##/##/##  +    *  /##/ *   ##/##/##/##/##     ##/##/",
+        "/##/##-/##/##/-------------##/-------/##/##/---##   + ##/##/",
+        "/##/##  ##/##    /        /##/        ## ##    ###------/##/",
+        "/##/## +##/##+   /   * + */##/    *   ## ##  + ###/##/##/##/",
+        "/##-----------/##/##------/##/##----------------##/##/##/##/",
+        "/##/          /##/##      /##/##  /            /##/## ## ##/",
+        "/##/ *   +    /##/##  +   /##/##  /   *   +    /##/## ## ##/",
+        "/##/--------##/##/------##/##/--##/----------##/##----##/##/",
+        "/##         ##/##       ## ##/  ##           ## ##    ##/##/",
+        "/##  +   *  ##/##   +   ## ##/  ##  +     *  ## ##  _ ##/##/",
         "/----------------------------------------------------------/"]
 
     timer = pygame.time.Clock()
@@ -110,13 +114,29 @@ def main():
                 entities.add(dr)
                 drab.append(dr)
             if col == "0":
-                door = Door(x, y)
-                entities.add(door)
-                doors.append(door)
+                door_sun = Door_sun(x, y)
+                entities.add(door_sun)
+                doors_sun.append(door_sun)
+            if col == "!":
+                door_moon = Door_moon(x, y)
+                entities.add(door_moon)
+                doors_moon.append(door_moon)
+            # if col == "1":
+            #     door_sun = Door_sun(x, y)
+            #     entities.add(door_sun)
+            #     doors_sun.append(door_sun)
+            # if col == "2":
+            #     door_moon = Door_moon(x, y)
+            #     entities.add(door_moon)
+            #     doors_moon.append(door_moon)
             if col == "_":
-                door = Button_sun(x, y)
-                entities.add(door)
-                doors.append(door)
+                button_s = Button_sun(x, y)
+                entities.add(button_s)
+                button_sun.add(button_s)
+            if col == "=":
+                button_m = Button_moon(x, y)
+                entities.add(button_m)
+                button_moon.add(button_m)
 
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
         y += PLATFORM_HEIGHT  # то же самое и с высотой
@@ -173,31 +193,40 @@ def main():
         heroes.draw(screen)
 
         heroes1.draw(screen)
-        # if pygame.sprite.groupcollide(heroes,gems_moon,False,True):
-        #     gems_count+=1
-        #     pygame.mixer.pre_init(44100, -16, 1, 512)
-        #     pygame.mixer.init()
-        #     pygame.mixer.music.load('music/gems.mp3')
-        #     pygame.mixer.music.play(1)
-        # if pygame.sprite.groupcollide(heroes1,gems_sun,False,True):
-        #     gems_count1+=1
-        #     pygame.mixer.pre_init(44100, -16, 1, 512)
-        #     pygame.mixer.init()
-        #     pygame.mixer.music.load('music/gems.mp3')
-        #     pygame.mixer.music.play(1)
-#вставити кнопку
-        if pygame.sprite.groupcollide(heroes, gems_moon, False, False):
-            entities.remove(doors)
-            doors = []
-        hero.update(left, right, up, down, platforms, doors)  # передвижение
-        hero1.update(left1, right1, up1, down1, platforms, doors)
+        if pygame.sprite.groupcollide(heroes,gems_moon,False,True):
+            gems_count+=1
+            pygame.mixer.pre_init(44100, -16, 1, 512)
+            pygame.mixer.init()
+            pygame.mixer.music.load('music/gems.mp3')
+            pygame.mixer.music.play(1)
+        if pygame.sprite.groupcollide(heroes1,gems_sun,False,True):
+            gems_count1+=1
+            pygame.mixer.pre_init(44100, -16, 1, 512)
+            pygame.mixer.init()
+            pygame.mixer.music.load('music/gems.mp3')
+            pygame.mixer.music.play(1)
+
+        if pygame.sprite.groupcollide(heroes1, button_sun, False, False):
+            entities.remove(doors_moon)
+            doors_moon = []
+        if pygame.sprite.groupcollide(heroes, button_moon, False, False):
+            entities.remove(doors_sun)
+            doors_sun = []
+        if gems_count==36 and gems_count1==42:
+            if pygame.sprite.groupcollide(heroes, heroes1, True, True):
+                print("the end")
+                start = 2
+                from The_end import*
+        hero.update(left, right, up, down, platforms, doors_moon)  # передвижение
+        hero1.update(left1, right1, up1, down1, platforms, doors_sun)
         # if gems_count==
-        hero.update(left, right, up, down, platforms,doors)  # передвижение
-        hero1.update(left1, right1, up1, down1, platforms,doors)
-
-
+        hero.update(left, right, up, down, platforms, doors_moon)  # передвижение
+        hero1.update(left1, right1, up1, down1, platforms, doors_sun)
+        # if gems_count==
+        print(gems_count1)
+        print(gems_count)
         pygame.display.flip()
         pygame.display.update()  # обновление и вывод всех изменений на экран
 
         # print(gems_count)ad
-main()
+

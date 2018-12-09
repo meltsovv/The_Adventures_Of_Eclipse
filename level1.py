@@ -1,12 +1,8 @@
-# Импортируем библиотеку pygame
 import pygame
 from pygame import *
 from player import Player
 from blocks import *
 from player1 import Player1
-
-# from start_main import *
-# Объявляем переменные
 WIN_WIDTH = 1920  # Ширина создаваемого окна
 WIN_HEIGHT = 1080  # Высота
 DISPLAY = (WIN_WIDTH, WIN_HEIGHT)  # Группируем ширину и высоту в одну переменную
@@ -16,22 +12,12 @@ st_y=995
 st_x1=64
 st_y1=40
 start=1
-
-
-# def main():
 if start==1:
     pygame.init()  # Инициация PyGame, обязательная строчка
     screen = pygame.display.set_mode(DISPLAY,FULLSCREEN)  # Создаем окошко
     pygame.display.set_caption("The Adventures Of Eclipse")  # Пишем в шапку
-
-    pygame.mixer.pre_init(44100, -16, 1, 512)
-    pygame.mixer.init()
-    pygame.mixer.music.load('music/fon.mp3')
-    pygame.mixer.music.play(-1)
     bg_image=pygame.image.load("image/moon_day.png").convert()
     bg_image1 = pygame.image.load("image/sun_day.png").convert()
-    # bg_image=pygame.transform.scale(bg_image,(1920,1080))
-
     hero = Player(st_x, st_y)  # соwздаем героя по (x,y) координатам
     left = right = False  # по умолчанию - стоим
     up = down = False
@@ -51,8 +37,6 @@ if start==1:
     heroes1.add(hero1)
     entities.add(hero)
     entities.add(hero1)
-
-
     level = [
         "------^-----^---------------^--^----------------------------",
         "/     /     /               /  /                           /",
@@ -75,7 +59,7 @@ if start==1:
         "/##/##/##-----------##/##---^---##-------------##--------##/",
         "/##/##/##/         /##/##   /  /##/            ##        ##/",
         "/##/##/##/   *  *  /##/##*  /  /##/  +   +     ##  +   + ##/",
-        "/##/##/##/##-----##-##----##/  /##/##------##------------##/",
+        "/##/##/##/##-----##/##----##/  /##/##------##------------##/",
         "/##/##/##/##    /##/##   /##/  /##/##     /##/          /##/",
         "/##/##/##/##*  */##/##*  /##/  /##/##+   +/##/+      +  /##/",
         "/##/##/##--------##----##/##/  /##/##------##-----^---##/##/",
@@ -88,7 +72,6 @@ if start==1:
         "/##                       ##/  /##           ##            /",
         "/##*   *   *   *    *    *##/  /##           ##            /",
         "/---------------------------$--$---------------------------/"]
-
     timer = pygame.time.Clock()
     x = y = 0  # координаты
     doors = []
@@ -130,9 +113,6 @@ if start==1:
                 door = Door(x, y)
                 entities.add(door)
                 doors.append(door)
-
-
-
             x += PLATFORM_WIDTH  # блоки платформы ставятся на ширине блоков
         y += PLATFORM_HEIGHT  # то же самое и с высотой
         x = 0  # на каждой новой строчке начинаем с нуля
@@ -144,7 +124,7 @@ if start==1:
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_ESCAPE:
                     raise SystemExit
-            if e.type == KEYDOWN and e.key == K_UP:
+            if e.type == KEYDOWN and e.key == K_UP :
                 up = True
             if e.type == KEYDOWN and e.key == K_LEFT:
                 left = True
@@ -199,34 +179,23 @@ if start==1:
             pygame.mixer.init()
             pygame.mixer.music.load('music/gems.mp3')
             pygame.mixer.music.play(1)
-        if gems_count == 2 and gems_count1 == 2:
+        if gems_count == 46 and gems_count1 == 47:
             pygame.mixer.pre_init(44100, -16, 1, 512)
             pygame.mixer.init()
             pygame.mixer.music.load('music/door.mp3')
             pygame.mixer.music.play(1)
-
             entities.remove(doors)
             doors=[]
-
-
-        # if gems_count1 == 2:
-        #     entities.remove(doors1)
-        #     doors=[]
         if pygame.sprite.groupcollide(heroes ,heroes1 ,True,True):
             print("the end")
             start=2
-
             from next_level2 import*
         entities.draw(screen)  # отображение
         heroes.draw(screen)
         heroes1.draw(screen)
         hero.update(left, right, up, down, platforms, doors)  # передвижение
         hero1.update(left1, right1, up1, down1, platforms, doors)
-        # if gems_count==
         hero.update(left, right, up, down, platforms,doors)  # передвижение
         hero1.update(left1, right1, up1, down1, platforms,doors)
         pygame.display.update()  # обновление и вывод всех изменений на экран
-        # print(gems_count)
 
-
-# main()
